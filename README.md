@@ -46,14 +46,17 @@ will be converted to NSDictionary like this:
 
 Where
   
-  ISXMLPARSER_QUALIFIED_NAME - tag name (full, with the namespaceURI, for example "ID" or "XMLPS:PHOTO")
+    ISXMLPARSER_QUALIFIED_NAME - tag name (full, with namespaceURI, e.g. "ID" or "XMLPS:PHOTO")
   
-  ISXMLPARSER_ELEMENT_TEXT - tag's text (12345 for <id>12345</id>)
+    ISXMLPARSER_ELEMENT_TEXT - tag's text (12345 for <id>12345</id>)
   
-  ISXMLPARSER_ENTITIES - child nodes represented as NSArray
+    ISXMLPARSER_ENTITIES - child nodes represented as NSArray
   
-  all attributes of tag will be included in element object like ("type" = "text")
+    all attributes of tag will be included in element object like ("type" = "text")
   
+
+You can change them in ISXMLParser.h, anyway
+
 
 Initialisation
 ==============
