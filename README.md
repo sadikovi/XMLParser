@@ -4,6 +4,7 @@ XMLParser
 Very simple XML parser for working with REST API for Objective-C.
 
 Creates NSDictionary from received XML object [with root key XML_TAG_MAIN].
+
 You can see the example of implementation in "Parser" folder.
 
 Example like this:
