@@ -51,36 +51,44 @@ Where
   all attributes of tag will be included in element object like ("type" = "text")
   
 
-
 Initialisation
 ==============
 
 Add files "ISXMLParser.h" and "ISXMLParser.m" to the project.
+
 Instantiate ISXMLParser as a parser with NSData received, calling:
 
-  ISXMLParser *parser = [[ISXMLParser alloc] initWithData:data];
-  parser.delegate = self;
+    ISXMLParser *parser = [[ISXMLParser alloc] initWithData:data];
+    parser.delegate = self;
 
+
+Protocol ISXMLParserDelegate
+============================
 All delegate methods are required:
-  XMLParser just started parsing data
-  - (void)parserDidStartParsingData:(ISXMLParser *)parser;
+    
+    XMLParser just started parsing data
+    - (void)parserDidStartParsingData:(ISXMLParser *)parser;
   
-  XMLParser finished parsing data with result available
-  - (void)parser:(ISXMLParser *)parser didFinishParsingWithResult:(NSDictionary *)result;
+    XMLParser finished parsing data with result available
+    - (void)parser:(ISXMLParser *)parser didFinishParsingWithResult:(NSDictionary *)result;
   
-  XMLParser failed with error while parsing
-  - (void)parser:(ISXMLParser *)parser didFailWithError:(NSError *)error;
+    XMLParser failed with error while parsing
+    - (void)parser:(ISXMLParser *)parser didFailWithError:(NSError *)error;
   
+
 Start parcing
 =============
 
 For start parcing just call (parser is an instance of ISXMLParser):
-  [parser startParsing];
   
+    [parser startParsing];
+  
+
 Cancel parsing
 ==============
 
 To cancel parsing call:
-  [parser cancelParsing];
+    
+    [parser cancelParsing];
   
   
