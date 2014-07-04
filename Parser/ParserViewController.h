@@ -7,7 +7,6 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "Stack.h"
 
 @interface ParserViewController : UIViewController
 
