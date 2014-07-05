@@ -28,8 +28,11 @@
 // protocol for ISXMLParser
 @protocol ISXMLParserDelegate
 @required
+// parser just started parsing NSData
 - (void)parserDidStartParsingData:(ISXMLParser *)parser;
+// parser did finish successfully with result as NSDictionary
 - (void)parser:(ISXMLParser *)parser didFinishParsingWithResult:(NSDictionary *)result;
+// parser failed with error
 - (void)parser:(ISXMLParser *)parser didFailWithError:(NSError *)error;
 @end
 
