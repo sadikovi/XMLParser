@@ -51,21 +51,23 @@
     return _currentProcessedElement;
 }
 
+- (id)lastElementInArray:(NSArray *)array {
+    // fix things for iOS 4
+    if ([array respondsToSelector:@selector(lastObject)]) {
+        return [array lastObject];
+    } else {
+        if (![array count]) {
+             return nil;
+        } else {
+             return [array objectAtIndex:([array count]-1)];
+        }
+    }
+}
+
 // current parent entities
 // used to identify and fill children for ENTITIES tag
 - (NSMutableArray *)currentParentEntities {
-    NSDictionary *lastOpenedElement;
-    
-    // fix things for iOS 4
-    if ([self.openedElements respondsToSelector:@selector(lastObject)]) {
-        lastOpenedElement = [self.openedElements lastObject];
-    } else {
-        if (![self.openedElements count]) {
-            lastOpenedElement = nil;
-        } else {
-            lastOpenedElement = [self.openedElements objectAtIndex:([self.openedElements count]-1)];
-        }
-    }
+    NSDictionary *lastOpenedElement = [self lastElementInArray:self.openedElements];
     
     return (NSMutableArray *)[lastOpenedElement objectForKey:ENTITIES];
 }
@@ -73,6 +75,13 @@
 - (NSString *)parsedBuffer {
     if (!_parsedBuffer) _parsedBuffer = [NSString string];
     return _parsedBuffer;
+}
+
+- (void)setParser:(NSXMLParser *)parser {
+    _parser = parser;
+    self.responseDictionary = nil;
+    self.parsedBuffer = nil;
+    self.openedElements = nil;
 }
 
 #pragma mark - Main methods
@@ -145,16 +154,10 @@
     self.parsedBuffer = nil;
     self.isCurrentProcessedData = NO;
     
-    /**
-     * TODO change this
-     *
-     */
-    // not really a good implementation
-    for (NSMutableDictionary *element in self.openedElements) {
-        if ([[element objectForKey:QUALIFIED_NAME] isEqualToString:qName]) {
-            [self.openedElements removeObject:element];
-            break;
-        }
+    // get last element and compare qNames
+    NSMutableDictionary *element = [self lastElementInArray:self.openedElements];
+    if ([[element objectForKey:QUALIFIED_NAME] isEqualToString:qName]) {
+        [self.openedElements removeObject:element];
     }
 }
 
